@@ -23,7 +23,6 @@ public class MainController {
 
     @PostMapping("/customer/insert")
     public void insertCustomer(@RequestBody Customer customer) {
-
         customers.insertCustomer(customer);
     }
 
