@@ -27,10 +27,11 @@ public class CustomerService {
     }
 
     private Customer formatData(Customer customer) {
-        customer.setFirstName(capitalizeString(customer.getFirstName()));
-        customer.setLastName(capitalizeString(customer.getLastName()));
-        customer.setPersonalNumber(formatPersonalNumber(customer.getPersonalNumber()));
-        return customer;
+        return new Customer.CustomerBuilder(capitalizeString(customer.getFirstName())
+                , capitalizeString(customer.getLastName()), formatPersonalNumber(customer.getPersonalNumber()))
+        .age(customer.getAge()).city(customer.getCity()).countryCode(customer.getCountryCode())
+        .employer(customer.getEmployer()).gender(customer.getGender()).maritalStatus(customer.getMaritalStatus())
+        .middleName(customer.getMiddleName()).monthlyIncome(customer.getMonthlyIncome()).build();
     }
 
     private String capitalizeString(String stringToCapitalize) {
@@ -39,7 +40,7 @@ public class CustomerService {
 
     private String formatPersonalNumber(String personalNumber) {
         StringBuilder formattedNumber = new StringBuilder(personalNumber);
-        if (personalNumber.length() > 4) {
+        if (personalNumber.length() > 4 && formattedNumber.charAt(4) != '-') {
             formattedNumber.insert(4, "-");
         }
         return formattedNumber.toString();
