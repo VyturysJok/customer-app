@@ -22,7 +22,7 @@ public class CustomerService {
     }
 
     public void insertCustomer(Customer customer) {
-        customerValidator.validateCustomer(customer);
+        customerValidator.validate(customer);
         customerRepository.insert(formatData(customer));
     }
 
